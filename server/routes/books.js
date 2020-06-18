@@ -59,10 +59,10 @@ router.route('/book')
 })
 
 
-router.route('all_books')
+router.route('/all_books')
 .get((req,res)=>{
     let skip = req.query.skip ? parseInt(req.query.skip) :0;
-    let limit = req.query.limit ? parseInt(req.query.limit) :0;
+    let limit = req.query.limit ? parseInt(req.query.limit) :50;
     let order = req.query.order ? req.query.order : 'asc';
     let byOwner = req.query.owner ? {ownerId:req.query.order} : {};
 

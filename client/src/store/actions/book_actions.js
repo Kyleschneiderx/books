@@ -3,7 +3,8 @@ import {
     BOOK_ADD,
     BOOK_CLEAR,
     BOOK_GET,
-    BOOK_UPDATE
+    BOOK_UPDATE,
+    BOOKS_GET
 } from '../types';
 
 
@@ -56,6 +57,23 @@ export function clearBook(book){
     return{
         type: BOOK_CLEAR,
         payload: null
+    }
+}
+
+export function getBooks(
+    limit=50,
+    start=0,
+    order='asc',
+    list
+
+){
+    const request = axios.get(`/api/books/all_books?limit=${limit}&skip=${start}&order=${order}`)
+    .then( response => {
+        return list ? [...list, ...response.data] : response.data 
+    });
+    return{
+        type: BOOKS_GET,
+        payload: request
     }
 }
 
